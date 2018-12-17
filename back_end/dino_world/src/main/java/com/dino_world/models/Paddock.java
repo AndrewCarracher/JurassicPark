@@ -40,6 +40,9 @@ public class Paddock {
         this.park = park;
     }
 
+    public Paddock() {
+    }
+
     public Park getPark() {
         return park;
     }
@@ -72,9 +75,6 @@ public class Paddock {
         this.containsCarnivores = containsCarnivores;
     }
 
-    public Paddock() {
-    }
-
     public int getCapacity() {
         return capacity;
     }
@@ -89,6 +89,10 @@ public class Paddock {
 
     public int numberOfDinosaurs(){
         return this.occupants.size();
+    }
+
+    public List<Dinosaur> getOccupants() {
+        return occupants;
     }
 
     public int freeSpace(){
