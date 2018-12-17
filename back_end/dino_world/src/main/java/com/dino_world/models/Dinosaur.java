@@ -1,0 +1,108 @@
+package com.dino_world.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name ="dinosaurs")
+public class Dinosaur {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "age")
+    private int age;
+
+    @Column(name = "fed")
+    private boolean fed;
+
+    @Column(name = "eats_meat")
+    private boolean eatsMeat;
+
+    @JsonIgnoreProperties("dinosaurs")
+    @ManyToOne
+    @JoinColumn(name = "paddock_id", nullable = false)
+    private Paddock paddock;
+
+    public Dinosaur(String name, String type, int age, boolean fed, boolean eatsMeat, Paddock paddock){
+        this.name = name;
+        this.type = type;
+        this.age = age;
+        this.fed = fed;
+        this.eatsMeat = eatsMeat;
+        this.paddock = paddock;
+    }
+
+    public Dinosaur() {
+    }
+
+    public Paddock getPaddock() {
+        return paddock;
+    }
+
+    public void setPaddock(Paddock paddock) {
+        this.paddock = paddock;
+    }
+
+    public boolean isEatsMeat() {
+        return eatsMeat;
+    }
+
+    public void setEatsMeat(boolean eatsMeat) {
+        this.eatsMeat = eatsMeat;
+    }
+
+    public void feedDinosaur(){
+        if (!isFed()){
+            setFed(true);
+        }
+    }
+
+    public boolean isFed() {
+        return fed;
+    }
+
+    public void setFed(boolean fed) {
+        this.fed = fed;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
