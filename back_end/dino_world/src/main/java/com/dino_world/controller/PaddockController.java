@@ -28,7 +28,7 @@ public class PaddockController {
         return paddockRepository.freeSpace(name);
     }
 
-    @GetMapping(value = "check_compatability/{dino_name}/{paddock_name}")
+    @GetMapping(value = "check_compatibility/{dino_name}/{paddock_name}")
     public boolean checkCompatibility(@PathVariable String dinosaurName, String paddockName){
         return paddockRepository.checkCompatibility(dinosaurName, paddockName);
     }
