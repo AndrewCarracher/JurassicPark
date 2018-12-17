@@ -156,7 +156,7 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
             return paddock.freeSpace();
 
         }
-        
+
         return 0;
     }
 }
