@@ -107,6 +107,22 @@ public class Park {
         this.rampage = rampage;
     }
 
+    public void addVisitors(Visitor visitor){
+        this.visitors.add(visitor);
+    }
+
+    public void removeVisitor(Visitor visitor){
+        for(int i = 0; i< this.visitors.size(); i++){
+            if(visitor.getId() == this.visitors.get(i).getId()){
+                this.visitors.remove(i);
+            }
+        }
+    }
+
+    public void removeAllVisitors(){
+        this.visitors.clear();
+    }
+
     public String checkParkOpen(int time){
         if(getOpenAt() < time && getClosedAt() > time){
             if(!isRampage()){
@@ -134,7 +150,7 @@ public class Park {
             return(paddock.checkCompatibility(dino));
     }
 
-    public void transferDino(String name, String type, boolean eatsMeat, String paddockName){
+    public void transferDino(String name, String type, boolean eatsMeat, Paddock paddockFrom, Paddock paddockTo){
 
         if(isRampage()){
             return;
@@ -148,10 +164,10 @@ public class Park {
         Dinosaur dino = findDino(name, type, eatsMeat);
         if(dino != null){
             for (int i = 0; i < pens.size(); i++){
-                if(pens.get(i).getName().equals(paddockName)){
-                    Paddock paddock = pens.get(i);
-                    if(checkTransferPen(dino, paddock)){
-                        paddock.addDinosaur(dino);
+                if(pens.get(i).getName().equals(paddockFrom.getName())){
+                    if(checkTransferPen(dino, paddockTo)){
+                        paddockFrom.removeDinosaur(dino.getName(), dino.getType());
+                        paddockTo.addDinosaur(dino);
                     }
                 }
             }
