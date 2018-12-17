@@ -1,5 +1,7 @@
 package com.dino_world.repositories.parks;
 
+import com.dino_world.models.Dinosaur;
+import com.dino_world.models.Paddock;
 import com.dino_world.models.Park;
 import com.dino_world.models.Visitor;
 import org.hibernate.Criteria;
@@ -46,7 +48,7 @@ public class ParkRepositoryImpl implements ParkRepositoryCustom{
             Criteria cr = session.createCriteria(Park.class);
             parkResult = cr.list();
             Criteria visitCr = session.createCriteria(Visitor.class);
-            cr.add(Restrictions.gt("id", visitorId));
+            visitCr.add(Restrictions.gt("id", visitorId));
             visitorResult = visitCr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -62,35 +64,93 @@ public class ParkRepositoryImpl implements ParkRepositoryCustom{
             }
         }
 
-
-
-
-
-
     }
 
     @Transactional
     public void removeVisitors(int visitorId){
 
+        List<Park> parkResult = null;
+        List<Visitor> visitorResult = null;
+        Session session = entityManager.unwrap(Session.class);
 
+        try {
+            Criteria cr = session.createCriteria(Park.class);
+            parkResult = cr.list();
+            Criteria visitCr = session.createCriteria(Visitor.class);
+            visitCr.add(Restrictions.gt("id", visitorId));
+            visitorResult = visitCr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
+        if(parkResult != null){
+            Park park = parkResult.get(0);
+            Visitor visitor = visitorResult.get(0);
 
-        park.removeVisitor(visitor);
+            park.removeVisitor(visitor);
+        }
     }
 
     @Transactional
     public void removeAllVisitors(){
 
+        List<Park> parkResult = null;
+        Session session = entityManager.unwrap(Session.class);
 
+        try {
+            Criteria cr = session.createCriteria(Park.class);
+            parkResult = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
-
-        park.removeAllVisitors();
+        if(parkResult != null){
+            Park park = parkResult.get(0);
+            park.removeAllVisitors();
+        }
     }
 
     @Transactional
     public void transferDino(String dinoName, String penFromName, String penToName){
-        if(park.checkTransferPen(dino, penTo)){
-            park.transferDino(dino.getName(), dino.getType(), dino.isEatsMeat(), penFrom, penTo);
+
+        List<Park> parkResult = null;
+        List<Dinosaur> dinoResult = null;
+        List<Paddock> penFrom = null;
+        List<Paddock> penTo = null;
+
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Park.class);
+            parkResult = cr.list();
+            Criteria dinoCr = session.createCriteria(Dinosaur.class);
+            dinoCr.add(Restrictions.gt("name", dinoName));
+            dinoResult = dinoCr.list();
+            Criteria penFromCr = session.createCriteria(Paddock.class);
+            penFromCr.add(Restrictions.gt("name", penFromName));
+            penFrom = penFromCr.list();
+            Criteria penToCr = session.createCriteria(Paddock.class);
+            penToCr.add(Restrictions.gt("name", penToName));
+            penFrom = penToCr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        if(parkResult != null){
+            Park park = parkResult.get(0);
+            Paddock penFromResult = penFrom.get(0);
+            Paddock penToResult = penTo.get(0);
+            Dinosaur dino = dinoResult.get(0);
+
+            if(park.checkTransferPen(dino, penToResult)){
+                park.transferDino(dino.getName(), dino.getType(), dino.isEatsMeat(), penFromResult, penToResult);
+            }
         }
 
     }
