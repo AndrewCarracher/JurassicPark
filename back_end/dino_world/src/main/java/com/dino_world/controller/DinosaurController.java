@@ -16,7 +16,7 @@ public class DinosaurController {
     @Autowired
     DinosaurRepository dinosaurRepository;
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/")
     public List<Dinosaur> allDinosaurs(){
         return dinosaurRepository.allDinosaurs();
     }

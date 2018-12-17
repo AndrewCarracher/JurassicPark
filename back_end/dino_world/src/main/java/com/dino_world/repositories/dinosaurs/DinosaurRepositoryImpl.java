@@ -34,4 +34,11 @@ public class DinosaurRepositoryImpl implements DinosaurRepositoryCustom {
         return result;
     }
 
+    @Transactional
+    public void feedDinosaurs(Dinosaur dinosaur){
+        if (!dinosaur.isFed()){
+            dinosaur.setFed(true);
+        }
+    }
+
 }

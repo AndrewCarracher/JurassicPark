@@ -60,12 +60,6 @@ public class Dinosaur {
         this.eatsMeat = eatsMeat;
     }
 
-    public void feedDinosaur(){
-        if (!isFed()){
-            setFed(true);
-        }
-    }
-
     public boolean isFed() {
         return fed;
     }
