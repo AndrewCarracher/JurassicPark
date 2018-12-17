@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface DinosaurRepositoryCustom {
     List<Dinosaur> allDinosaurs();
-    void feedDinosaurs(Dinosaur dinosaur);
+    List<Dinosaur> getDinosaurByName(String name);
+    public void feedDinosaur(String name);
 }
