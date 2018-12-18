@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface ParkRepositoryCustom {
     List<Park> allParks();
-    void addVisitors(int time, int visitorId);
-    void removeVisitors(int visitorId);
+    void addVisitors(int time);
     void removeAllVisitors();
     void transferDino(String dinoName, String penFromName, String penToName);
 }

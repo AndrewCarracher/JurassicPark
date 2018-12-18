@@ -3,6 +3,7 @@ package com.dino_world.components;
 import com.dino_world.models.Dinosaur;
 import com.dino_world.models.Paddock;
 import com.dino_world.models.Park;
+import com.dino_world.models.Visitor;
 import com.dino_world.repositories.dinosaurs.DinosaurRepository;
 import com.dino_world.repositories.paddocks.PaddockRepository;
 import com.dino_world.repositories.parks.ParkRepository;
@@ -29,7 +30,7 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
 
-        Park dinoWorld = new Park(15000, true, 9, 20, false);
+        Park dinoWorld = new Park(0, 15000, true, 9, 20, false);
         parkRepository.save(dinoWorld);
 
         Paddock paddock1 = new Paddock(30, "paddock1", dinoWorld);
@@ -54,6 +55,9 @@ public class DataLoader implements ApplicationRunner {
         dinosaurRepository.save(dino1);
         paddock1.setContainsCarnivores(true);
         paddockRepository.save(paddock1);
+
+        Visitor visitor = new Visitor();
+        parkRepository.addVisitors(11);
 
     }
 }

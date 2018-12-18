@@ -29,17 +29,17 @@ public class PaddockController {
     }
 
     @GetMapping(value = "check_compatibility/{dino_name}/{paddock_name}")
-    public boolean checkCompatibility(@PathVariable String dinosaurName, String paddockName){
+    public boolean checkCompatibility(@PathVariable String dinosaurName, @PathVariable String paddockName){
         return paddockRepository.checkCompatibility(dinosaurName, paddockName);
     }
 
    @GetMapping(value = "add_dino/{dino_name/{paddock_name}")
-   public void addDinosaur(@PathVariable String dinosaurName, String paddockName){
+   public void addDinosaur(@PathVariable String dinosaurName, @PathVariable String paddockName){
         paddockRepository.addDinosaur(dinosaurName, paddockName);
    }
 
    @GetMapping(value = "remove_dino/{dino_name}/{dino_type}/{paddock_name}")
-   public Dinosaur removeDinosaur(@PathVariable String name, String type, String paddockName){
+   public Dinosaur removeDinosaur(@PathVariable String name, @PathVariable String type, @PathVariable String paddockName){
         return paddockRepository.removeDinosaur(name, type, paddockName);
    }
 }

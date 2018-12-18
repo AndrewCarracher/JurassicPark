@@ -38,18 +38,33 @@ public class ParkRepositoryImpl implements ParkRepositoryCustom{
     }
 
     @Transactional
-    public void addVisitors(int time, int visitorId){
-
+    public int visitorCount(){
         List<Park> parkResult = null;
-        List<Visitor> visitorResult = null;
         Session session = entityManager.unwrap(Session.class);
-
         try {
             Criteria cr = session.createCriteria(Park.class);
             parkResult = cr.list();
-            Criteria visitCr = session.createCriteria(Visitor.class);
-            visitCr.add(Restrictions.gt("id", visitorId));
-            visitorResult = visitCr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+
+        Park park = parkResult.get(0);
+        return park.checkNumberOfVisitors();
+
+    }
+
+    @Transactional
+    public void addVisitors(int time){
+
+        List<Park> parkResult = null;
+        Visitor visitor = new Visitor();
+        Session session = entityManager.unwrap(Session.class);
+        try {
+            Criteria cr = session.createCriteria(Park.class);
+            parkResult = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
@@ -58,7 +73,6 @@ public class ParkRepositoryImpl implements ParkRepositoryCustom{
 
         if(parkResult != null){
             Park park = parkResult.get(0);
-            Visitor visitor = visitorResult.get(0);
             if(park.checkParkOpen(time).equals("Park is open")){
                 park.addVisitors(visitor);
             }
@@ -66,32 +80,6 @@ public class ParkRepositoryImpl implements ParkRepositoryCustom{
 
     }
 
-    @Transactional
-    public void removeVisitors(int visitorId){
-
-        List<Park> parkResult = null;
-        List<Visitor> visitorResult = null;
-        Session session = entityManager.unwrap(Session.class);
-
-        try {
-            Criteria cr = session.createCriteria(Park.class);
-            parkResult = cr.list();
-            Criteria visitCr = session.createCriteria(Visitor.class);
-            visitCr.add(Restrictions.gt("id", visitorId));
-            visitorResult = visitCr.list();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        if(parkResult != null){
-            Park park = parkResult.get(0);
-            Visitor visitor = visitorResult.get(0);
-
-            park.removeVisitor(visitor);
-        }
-    }
 
     @Transactional
     public void removeAllVisitors(){

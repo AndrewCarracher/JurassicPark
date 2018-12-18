@@ -28,6 +28,9 @@ public class Park {
     @Column(name = "capacity")
     private int capacity;
 
+    @Column(name = "visitor_count")
+    private int visitorCount;
+
     @Column(name = "park_currently_open")
     private boolean parkOpen;
 
@@ -40,16 +43,25 @@ public class Park {
     @Column(name = "park_in_rampage")
     private boolean rampage;
 
-    public Park(int capacity, boolean parkOpen, int openAt, int closedAt, boolean rampage) {
+    public Park(int visitorCount, int capacity, boolean parkOpen, int openAt, int closedAt, boolean rampage) {
         this.capacity = capacity;
         this.parkOpen = parkOpen;
         this.openAt = openAt;
         this.closedAt = closedAt;
         this.rampage = rampage;
+        this.visitorCount = visitorCount;
     }
 
     public void setPens(ArrayList<Paddock> pens) {
         this.pens = pens;
+    }
+
+    public int getVisitorCount() {
+        return visitorCount;
+    }
+
+    public void setVisitorCount(int visitorCount) {
+        this.visitorCount = visitorCount;
     }
 
     public Park() {
@@ -65,6 +77,10 @@ public class Park {
 
     public void setVisitors(ArrayList<Visitor> visitors) {
         this.visitors = visitors;
+    }
+
+    public int checkNumberOfVisitors(){
+        return this.visitors.size();
     }
 
     public int getCapacity() {
