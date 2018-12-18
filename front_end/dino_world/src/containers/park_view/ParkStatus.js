@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Request from '../../helpers/request';
-import ParkBoxStatus from '../../components/ParkBoxStatus';
-import RampageBoxStatus from '../../components/RampageBoxStatus';
+import ParkBoxStatus from '../../components/park_view/ParkBoxStatus';
+import RampageBoxStatus from '../../components/park_view/RampageBoxStatus';
 
-class VisitorCount extends Component {
+class ParkStatus extends Component {
   constructor(props){
     super(props);
     this.state = {park_open: [], rampaging: []}
     this.changeParkOpen = this.changeParkOpen.bind(this);
     this.changeRampageStatus = this.changeRampageStatus.bind(this);
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   componentDidMount(){
@@ -63,4 +63,4 @@ class VisitorCount extends Component {
   }
 }
 
-export default VisitorCount;
+export default ParkStatus;

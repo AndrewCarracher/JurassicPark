@@ -1,18 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { Link } from "react-router-dom";
 
-class Navbar extends Component {
+const Navbar = () => {
 
-  render(){
     return(
-      <>
         <ul id = "navbar">
-          <li className = "navitem">Park</li>
-          <li className = "navitem">Paddocks</li>
-          <li className = "navitem">Dinosaurs</li>
+          <li className = "navitem">
+            <Link to ="/park_overview">Park</Link>
+          </li>
+          <li className = "navitem">
+            <Link to ="/paddocks_overview">Paddocks</Link>
+          </li>
+          <li className = "navitem">
+            <Link to ="/dinosaurs_overview">Dinosaurs</Link>
+          </li>
         </ul>
-      </>
     );
-  }
+
 }
 
 export default Navbar;

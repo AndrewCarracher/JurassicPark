@@ -1,6 +1,6 @@
 package com.dino_world.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class Paddock {
     @Column(name = "contains_carnivores")
     private boolean containsCarnivores;
 
-    @JsonIgnoreProperties("paddocks")
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "park_id", nullable = false)
     private Park park;

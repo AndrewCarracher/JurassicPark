@@ -1,6 +1,6 @@
 package com.dino_world.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -27,7 +27,7 @@ public class Dinosaur {
     @Column(name = "eats_meat")
     private boolean eatsMeat;
 
-    @JsonIgnoreProperties("dinosaurs")
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "paddock_id", nullable = false)
     private Paddock paddock;

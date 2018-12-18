@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PaddockStatus from './park_view/PaddockStatus';
+import PaddockStatus from './park_view/PaddockStatus';
 import ParkStatus from './park_view/ParkStatus';
 import VisitorCount from './park_view/VisitorCount';
 
@@ -29,8 +29,10 @@ class ParkView extends Component {
   render() {
     return (
         <>
+          <h2>ParkView</h2>
           <VisitorCount open = {this.state.park_open} rampaging = {this.state.rampaging}/>
           <ParkStatus open = {this.state.park_open} rampaging = {this.state.rampaging} handleParkOpen = {this.handleParkOpen}/>
+          <PaddockStatus />
         </>
     );
   }

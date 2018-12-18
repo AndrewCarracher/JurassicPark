@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CurrentVisitorCount from '../../components/CurrentVisitorCount';
-import AddVisitor from '../../components/AddVisitor';
+import CurrentVisitorCount from '../../components/park_view/CurrentVisitorCount';
+import AddVisitor from '../../components/park_view/AddVisitor';
 import Request from '../../helpers/request'
 
 class VisitorCount extends Component {
