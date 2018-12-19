@@ -23,6 +23,12 @@ public class PaddockController {
         return paddockRepository.allPaddocks();
     }
 
+    @GetMapping(value= "add_new_dinosaur/{name}/{age}/{species}/{fed}/{eats_meat}")
+    public void addNewDinosaur(@PathVariable String dinosaurName, @PathVariable int dinosaurAge, @PathVariable String dinosaurSpecies, @PathVariable boolean fed, @PathVariable boolean eatsMeat){
+        paddockRepository.addNewDinosaur(dinosaurName, dinosaurAge, dinosaurSpecies, fed, eatsMeat);
+    }
+
+
     @GetMapping(value = "check_space/{name}")
     public int freeSpace(@PathVariable String name){
         return paddockRepository.freeSpace(name);

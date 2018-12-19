@@ -10,5 +10,6 @@ public interface PaddockRepositoryCustom {
     int freeSpace(String paddockName);
     boolean checkCompatibility(String dinosaurName, String paddockName);
     void addDinosaur(String dinosaurName, String paddockName);
+    void addNewDinosaur(String dinosaurName, int dinosaurAge, String dinosaurSpecies, boolean fed, boolean eatsMeat);
     Dinosaur removeDinosaur(String name, String type, String paddockName);
 }

@@ -76,6 +76,29 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
 
     }
 
+    public void addNewDinosaur(String dinosaurName, int dinosaurAge, String dinosaurSpecies, boolean fed, boolean eatsMeat){
+        List<Paddock> paddockResult = null;
+        List<Dinosaur> dinosaurResult = null;
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Paddock.class);
+            cr.add(Restrictions.gt("contains_carnivores", eatsMeat));
+            paddockResult = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        if (paddockResult.size() > 0) {
+            Paddock paddock = paddockResult.get(0);
+            Dinosaur dinosaur = new Dinosaur(dinosaurName, dinosaurSpecies, dinosaurAge, fed, eatsMeat, paddock);
+            paddock.addDinosaur(dinosaur);
+        }
+    }
+
+
     @Transactional
     public void addDinosaur(String dinosaurName, String paddockName){
 

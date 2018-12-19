@@ -12,7 +12,6 @@ class App extends Component {
     return (
         <>
           <Header />
-
           <Router>
             <>
               <Navbar />
@@ -21,8 +20,6 @@ class App extends Component {
               <Route exact path="/dinosaurs_overview" component={DinosaurView} />
             </>
           </Router>
-
-
         </>
     );
   }
