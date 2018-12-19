@@ -1,7 +1,5 @@
 package com.dino_world.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +13,6 @@ public class Visitor {
     @Column(name = "money")
     private int money;
 
-    @JsonIgnoreProperties("visitors")
     @ManyToOne
     @JoinColumn(name = "park_id", nullable = false)
     private Park park;

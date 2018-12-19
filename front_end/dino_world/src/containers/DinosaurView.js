@@ -11,13 +11,16 @@ class DinosaurView extends Component {
   }
 
   handleDinosaurSubmit(newDino){
-    const request = new Request();
-    console.log(newDino);
-    let requestString = this.props.name + "/" + this.props.age + "/" + this.props.species + "/" + this.props.fed + "/" + this.props.eats_meat;
+    if(newDino){
+      console.log(newDino);
+      const request = new Request();
+      let requestString = newDino.name + "/" + newDino.age + "/" +        newDino.species + "/" + newDino.fed + "/" + newDino.eatsMeat;
 
-    request.post("paddocks/add_new_dinosaur/" + requestString, newDino).then(() => {
-      window.location = "/paddocks"
-    })
+      request.post("/paddocks/add_new_dinosaur/" + requestString, newDino).then(() => {
+        console.log(requestString);
+        // window.location = "/paddocks"
+      })
+    }
   }
 
 render(){

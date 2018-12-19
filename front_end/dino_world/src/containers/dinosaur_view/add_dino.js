@@ -16,8 +16,6 @@ class AddDino extends Component {
     this.handleFedChange = this.handleFedChange.bind(this);
     this.handleEatsMeatChange = this.handleEatsMeatChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
-    console.log(this.state);
   }
   handleNameChange(event) {
     const name = event.target.value;
@@ -33,10 +31,12 @@ class AddDino extends Component {
   }
   handleFedChange(event) {
     const fed = event.target.value;
+    console.log(event.target.value);
     this.setState({fed: fed});
   }
   handleEatsMeatChange(event) {
     const eatsMeat = event.target.value;
+    console.log(event.target.value);
     this.setState({eatsMeat: eatsMeat});
   }
 
@@ -50,7 +50,7 @@ class AddDino extends Component {
 
     const comment = {name: name, age: age, species: species, fed: fed, eatsMeat: eatsMeat};
     this.props.handleDinosaurSubmit(comment);
-    this.setState({name: '', age: '', species: ''});
+    this.setState({name: '', age: '', species: '', fed: '', eatsMeat: ''});
   }
 
 render(){
@@ -61,10 +61,10 @@ render(){
         <input type="text" placeholder="name" value={this.state.name} onChange={this.handleNameChange}/><br/>
         <input type="text" placeholder="age" value={this.state.age} onChange={this.handleAgeChange}/><br/>
         <input type="text" placeholder="species" value={this.state.species} onChange={this.handleSpeciesChange}/><br/>
-        <input type="radio" name="fed" value={this.state.fed} onChange= {this.handleFedChange} checked />fed
-        <input type="radio" name="fed" value={this.state.fed} onChange= {this.handleFedChange} />not fed<br/>
-        <input type="radio" name="eatsMeat" value={this.state.eatsMeat}  onChange= {this.handleEatsMeatChange} checked />Carnivore
-        <input type="radio" name="eatsMeat" value={this.state.eatsMeat} onChange= {this.handleEatsMeatChange} />Herbivore<br/>
+        <input type="radio" name="fed" value="true" onChange= {(e) => this.handleFedChange(e)}/>fed
+        <input type="radio" name="fed" value="false" onChange= {(e) => this.handleFedChange(e)} />not fed<br/>
+        <input type="radio" name="eatsMeat" value="true" onChange= {(e) => this.handleEatsMeatChange(e)}  />Carnivore
+        <input type="radio" name="eatsMeat" value="false" onChange= {(e) =>this.handleEatsMeatChange(e)} />Herbivore<br/>
         <input type="submit" value="Add Dinosaur"/>
       </form>
     </>

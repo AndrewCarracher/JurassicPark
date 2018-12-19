@@ -83,7 +83,6 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
 
         try {
             Criteria cr = session.createCriteria(Paddock.class);
-            cr.add(Restrictions.gt("contains_carnivores", eatsMeat));
             paddockResult = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -91,10 +90,14 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
             session.close();
         }
 
-        if (paddockResult.size() > 0) {
-            Paddock paddock = paddockResult.get(0);
-            Dinosaur dinosaur = new Dinosaur(dinosaurName, dinosaurSpecies, dinosaurAge, fed, eatsMeat, paddock);
-            paddock.addDinosaur(dinosaur);
+        for(int i = 0; i< paddockResult.size(); i++){
+            if(paddockResult.get(i).isContainsCarnivores() == eatsMeat){
+                if (paddockResult.get(i).freeSpace() > 0) {
+                    Paddock paddock = paddockResult.get(i);
+                    Dinosaur dinosaur = new Dinosaur(dinosaurName, dinosaurSpecies, dinosaurAge, fed, eatsMeat, paddock);
+                    paddock.addDinosaur(dinosaur);
+                }
+            }
         }
     }
 

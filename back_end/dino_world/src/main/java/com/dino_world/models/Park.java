@@ -1,6 +1,5 @@
 package com.dino_world.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -8,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "parks")
+@Table(name = "park")
 public class Park {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonIgnoreProperties("paddocks")
+
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(mappedBy = "park", fetch = FetchType.LAZY)
     private List<Visitor> visitors;
 
-    @JsonIgnoreProperties("visitors")
+
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(mappedBy = "park", fetch = FetchType.LAZY)
     private List<Paddock> pens;

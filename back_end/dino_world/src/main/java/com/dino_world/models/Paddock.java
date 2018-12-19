@@ -33,11 +33,12 @@ public class Paddock {
     @JoinColumn(name = "park_id", nullable = false)
     private Park park;
 
-    public Paddock(int capacity, String name, Park park) {
+    public Paddock(int capacity, String name, Park park, boolean containsCarnivores) {
         this.name = name;
         this.capacity = capacity;
         this.occupants = new ArrayList<>();
         this.park = park;
+        this.containsCarnivores = containsCarnivores;
     }
 
     public Paddock() {

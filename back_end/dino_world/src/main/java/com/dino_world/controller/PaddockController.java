@@ -4,10 +4,7 @@ import com.dino_world.models.Dinosaur;
 import com.dino_world.models.Paddock;
 import com.dino_world.repositories.paddocks.PaddockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +20,10 @@ public class PaddockController {
         return paddockRepository.allPaddocks();
     }
 
-    @GetMapping(value= "add_new_dinosaur/{name}/{age}/{species}/{fed}/{eats_meat}")
+    @PostMapping(value= "/add_new_dinosaur/{dinosaurName}/{dinosaurAge}/{dinosaurSpecies}/{fed}/{eatsMeat}")
     public void addNewDinosaur(@PathVariable String dinosaurName, @PathVariable int dinosaurAge, @PathVariable String dinosaurSpecies, @PathVariable boolean fed, @PathVariable boolean eatsMeat){
         paddockRepository.addNewDinosaur(dinosaurName, dinosaurAge, dinosaurSpecies, fed, eatsMeat);
+
     }
 
 

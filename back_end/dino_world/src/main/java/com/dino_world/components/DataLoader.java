@@ -33,22 +33,22 @@ public class DataLoader implements ApplicationRunner {
         Park dinoWorld = new Park(0, 15000, true, 9, 20, false);
         parkRepository.save(dinoWorld);
 
-        Paddock paddock1 = new Paddock(30, "paddock1", dinoWorld);
+        Paddock paddock1 = new Paddock(30, "paddock1", dinoWorld, false);
         paddockRepository.save(paddock1);
 
-        Paddock paddock2 = new Paddock(30, "paddock2", dinoWorld);
+        Paddock paddock2 = new Paddock(30, "paddock2", dinoWorld, false);
         paddockRepository.save(paddock2);
 
-        Paddock paddock3 = new Paddock(30, "paddock3", dinoWorld);
+        Paddock paddock3 = new Paddock(30, "paddock3", dinoWorld, false);
         paddockRepository.save(paddock3);
 
-        Paddock paddock4 = new Paddock(30, "paddock4", dinoWorld);
+        Paddock paddock4 = new Paddock(30, "paddock4", dinoWorld, false);
         paddockRepository.save(paddock4);
 
-        Paddock paddock5 = new Paddock(30, "paddock5", dinoWorld);
+        Paddock paddock5 = new Paddock(30, "paddock5", dinoWorld, false);
         paddockRepository.save(paddock5);
 
-        Paddock paddock6 = new Paddock(30, "paddock6", dinoWorld);
+        Paddock paddock6 = new Paddock(30, "paddock6", dinoWorld, false);
         paddockRepository.save(paddock6);
 
         Dinosaur dino1 = new Dinosaur("frank", "raptor", 6, false, true, paddock1);
