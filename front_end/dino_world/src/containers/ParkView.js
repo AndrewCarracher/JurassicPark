@@ -30,8 +30,10 @@ class ParkView extends Component {
     return (
         <>
           <h2>ParkView</h2>
+          <div id="park_info">
           <VisitorCount open = {this.state.park_open} rampaging = {this.state.rampaging}/>
           <ParkStatus open = {this.state.park_open} rampaging = {this.state.rampaging} handleParkOpen = {this.handleParkOpen}/>
+          </div>
           <PaddockStatus />
         </>
     );

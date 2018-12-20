@@ -49,14 +49,20 @@ class ParkStatus extends Component {
   render() {
     return (
         <>
+          <p>Current Park Status</p>
           <div id = "park_status">
-            <p>Current Park Status</p>
-            <p>Park Open/ Closed</p>
-            <div className ="parkStatus"><ParkBoxStatus status ={this.state.park_open}/></div>
-            <button onClick={this.changeParkOpen}>Change Status</button>
-            <p>Rampage Status</p>
-            <div className ="parkStatus"><RampageBoxStatus status ={this.state.rampaging}/></div>
-            <button onClick={this.changeRampageStatus}>Change Status</button>
+            <div className ="parkStatus">
+              <ParkBoxStatus status ={this.state.park_open}/>
+            </div>
+            <div className ="parkStatus">
+              <RampageBoxStatus status ={this.state.rampaging}/>
+            </div>
+            <div className ="parkStatus">
+              <button onClick={this.changeParkOpen}>Change Status</button>
+            </div>
+            <div className ="parkStatus">
+              <button onClick={this.changeRampageStatus}>Change Status</button>
+            </div>
           </div>
         </>
     );

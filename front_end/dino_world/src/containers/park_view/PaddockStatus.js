@@ -26,12 +26,26 @@ class VisitorCount extends Component {
   render() {
       return(
         <>
+        <div id = "paddock_box_overview">
+          <div className= "paddock_box">
             <PaddockBoxStatus paddocks = {this.state.paddock1}/>
+          </div>
+          <div className= "paddock_box">
             <PaddockBoxStatus paddocks = {this.state.paddock2}/>
+          </div>
+          <div className= "paddock_box">
             <PaddockBoxStatus paddocks = {this.state.paddock3}/>
+          </div>
+          <div className= "paddock_box">
             <PaddockBoxStatus paddocks = {this.state.paddock4}/>
+          </div>
+          <div className= "paddock_box">
             <PaddockBoxStatus paddocks = {this.state.paddock5}/>
+          </div>
+          <div className= "paddock_box">
             <PaddockBoxStatus paddocks = {this.state.paddock6}/>
+          </div>
+          </div>
         </>
     );
   }
