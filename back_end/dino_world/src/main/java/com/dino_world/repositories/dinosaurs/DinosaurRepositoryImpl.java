@@ -27,12 +27,15 @@ public class DinosaurRepositoryImpl implements DinosaurRepositoryCustom {
             result = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
-        } finally {
-            session.close();
         }
 
 
         return result;
+    }
+
+    @Transactional
+    public Dinosaur createDinosaur(Dinosaur dino){
+        return dino;
     }
 
     @Transactional

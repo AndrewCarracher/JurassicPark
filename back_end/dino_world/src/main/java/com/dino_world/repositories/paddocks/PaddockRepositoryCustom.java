@@ -8,8 +8,7 @@ import java.util.List;
 public interface PaddockRepositoryCustom {
     List<Paddock> allPaddocks();
     int freeSpace(String paddockName);
-    boolean checkCompatibility(String dinosaurName, String paddockName);
-    void addDinosaur(String dinosaurName, String paddockName);
+    public Long checkNewDinosaur(Dinosaur dinosaur);
     void addNewDinosaur(String dinosaurName, int dinosaurAge, String dinosaurSpecies, boolean fed, boolean eatsMeat);
     Dinosaur removeDinosaur(String name, String type, String paddockName);
 }

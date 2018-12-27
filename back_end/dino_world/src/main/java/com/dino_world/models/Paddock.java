@@ -96,8 +96,10 @@ public class Paddock {
         return occupants;
     }
 
-    public int freeSpace(){
-        return this.capacity - numberOfDinosaurs();
+    public void addDinosaur(Dinosaur dinosaur){
+        if(checkCompatibility(dinosaur)){
+            occupants.add(dinosaur);
+        }
     }
 
     public boolean checkCompatibility(Dinosaur dinosaur){
@@ -115,12 +117,6 @@ public class Paddock {
         }
     }
 
-    public void addDinosaur(Dinosaur dinosaur){
-        if(checkCompatibility(dinosaur)){
-            occupants.add(dinosaur);
-        }
-    }
-
     public Dinosaur removeDinosaur(String name, String type){
         for(int i = 0; i < numberOfDinosaurs(); i++){
             if (occupants.get(i).getName().equals(name) && occupants.get(i).getType().equals(type)){
@@ -129,5 +125,6 @@ public class Paddock {
         }
         return null;
     }
+
 
 }

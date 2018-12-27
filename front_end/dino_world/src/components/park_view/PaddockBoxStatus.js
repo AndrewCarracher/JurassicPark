@@ -2,8 +2,6 @@ import React from 'react';
 
 const PaddockBoxStatus = (props) => {
 
-console.log(props);
-
 if(props.paddocks.occupants){
   if(props.paddocks.containsCarnivores){
     return(

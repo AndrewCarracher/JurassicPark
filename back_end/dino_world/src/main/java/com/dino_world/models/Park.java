@@ -14,12 +14,6 @@ public class Park {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
-    @OneToMany(mappedBy = "park", fetch = FetchType.LAZY)
-    private List<Visitor> visitors;
-
-
     @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(mappedBy = "park", fetch = FetchType.LAZY)
     private List<Paddock> pens;
@@ -63,6 +57,14 @@ public class Park {
         this.visitorCount = visitorCount;
     }
 
+    public void addVisitor(){
+        this.visitorCount += 1;
+    }
+
+    public void removeAllVisitors(){
+        this.visitorCount = 0;
+    }
+
     public Park() {
     }
 
@@ -72,14 +74,6 @@ public class Park {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setVisitors(ArrayList<Visitor> visitors) {
-        this.visitors = visitors;
-    }
-
-    public int checkNumberOfVisitors(){
-        return this.visitors.size();
     }
 
     public int getCapacity() {
@@ -120,22 +114,6 @@ public class Park {
 
     public void setRampage(boolean rampage) {
         this.rampage = rampage;
-    }
-
-    public void addVisitors(Visitor visitor){
-        this.visitors.add(visitor);
-    }
-
-    public void removeVisitor(Visitor visitor){
-        for(int i = 0; i< this.visitors.size(); i++){
-            if(visitor.getId() == this.visitors.get(i).getId()){
-                this.visitors.remove(i);
-            }
-        }
-    }
-
-    public void removeAllVisitors(){
-        this.visitors.clear();
     }
 
     public String checkParkOpen(int time){

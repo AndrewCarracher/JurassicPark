@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Request from '../../helpers/request';
 import PaddockBoxStatus from '../../components/park_view/PaddockBoxStatus';
 
-class VisitorCount extends Component {
+class PaddockStatus extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -19,7 +19,6 @@ class VisitorCount extends Component {
         this.setState({paddock4: data[3]});
         this.setState({paddock5: data[2]});
         this.setState({paddock6: data[1]});
-        console.log(this.state);
     })
   }
 
@@ -51,4 +50,4 @@ class VisitorCount extends Component {
   }
 }
 
-export default VisitorCount;
+export default PaddockStatus;

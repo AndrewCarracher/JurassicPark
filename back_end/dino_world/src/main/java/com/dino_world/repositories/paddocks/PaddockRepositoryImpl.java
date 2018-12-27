@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
@@ -35,47 +36,38 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
         return result;
     }
 
-    @Transactional
-    public boolean checkCompatibility(String dinosaurName, String paddockName){
 
+    @Transactional
+    public Long checkNewDinosaur(Dinosaur dinosaur){
         List<Paddock> paddockResult = null;
-        List<Dinosaur> dinosaurResult = null;
         Session session = entityManager.unwrap(Session.class);
 
         try {
             Criteria cr = session.createCriteria(Paddock.class);
-            cr.add(Restrictions.gt("name", paddockName));
+            cr.add(Restrictions.gt("containsCarnivores", dinosaur.isEatsMeat()));
             paddockResult = cr.list();
-            Criteria newCr = session.createCriteria(Dinosaur.class);
-            cr.add(Restrictions.gt("name", dinosaurName));
-            dinosaurResult = newCr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
-        } finally {
-            session.close();
         }
 
-        if (paddockResult.size() > 0 && dinosaurResult.size() > 0){
-            Dinosaur dinosaur = dinosaurResult.get(0);
-            Paddock paddock = paddockResult.get(0);
-            if(paddock.numberOfDinosaurs() == 0){
-                return true;
+        ArrayList<Long> paddocks = new ArrayList<Long>();
+
+        for(int i = 0; i< paddockResult.size(); i++){
+                Paddock paddock = paddockResult.get(i);
+
+                if (this.freeSpace(paddock.getName()) > 0) {
+                    paddocks.add(paddock.getId());
+                }
             }
-            else if(!dinosaur.isEatsMeat() && !paddock.isContainsCarnivores()){
-                return true;
+            if(paddocks.size() > 0) {
+                return (paddocks.get(0));
             }
-            else if (paddock.getOccupants().get(0).getType().equals(dinosaur.getType())){
-                return true;
-            }
-            else{
-                return false;
-            }
+
+            return null;
         }
 
-        return false;
 
-    }
-
+    @Transactional
     public void addNewDinosaur(String dinosaurName, int dinosaurAge, String dinosaurSpecies, boolean fed, boolean eatsMeat){
         List<Paddock> paddockResult = null;
         List<Dinosaur> dinosaurResult = null;
@@ -86,48 +78,17 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
             paddockResult = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
-        } finally {
-            session.close();
         }
 
         for(int i = 0; i< paddockResult.size(); i++){
             if(paddockResult.get(i).isContainsCarnivores() == eatsMeat){
-                if (paddockResult.get(i).freeSpace() > 0) {
-                    Paddock paddock = paddockResult.get(i);
-                    Dinosaur dinosaur = new Dinosaur(dinosaurName, dinosaurSpecies, dinosaurAge, fed, eatsMeat, paddock);
+                Paddock paddock = paddockResult.get(i);
+
+                if (this.freeSpace(paddock.getName()) > 0) {
+                    Dinosaur dinosaur = new Dinosaur(dinosaurName, dinosaurSpecies, dinosaurAge, fed, eatsMeat);
+                    dinosaur.setPaddock(paddock);
                     paddock.addDinosaur(dinosaur);
                 }
-            }
-        }
-    }
-
-
-    @Transactional
-    public void addDinosaur(String dinosaurName, String paddockName){
-
-        List<Paddock> paddockResult = null;
-        List<Dinosaur> dinosaurResult = null;
-        Session session = entityManager.unwrap(Session.class);
-
-        try {
-            Criteria cr = session.createCriteria(Paddock.class);
-            cr.add(Restrictions.gt("name", paddockName));
-            paddockResult = cr.list();
-            Criteria newCr = session.createCriteria(Dinosaur.class);
-            cr.add(Restrictions.gt("name", dinosaurName));
-            dinosaurResult = newCr.list();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        if (paddockResult.size() > 0 && dinosaurResult.size() > 0) {
-            Dinosaur dinosaur = dinosaurResult.get(0);
-            Paddock paddock = paddockResult.get(0);
-
-            if (checkCompatibility(dinosaur.getName(), paddock.getName())) {
-                paddock.addDinosaur(dinosaur);
             }
         }
     }
@@ -144,8 +105,6 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
             paddockResult = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
-        } finally {
-            session.close();
         }
 
         if (paddockResult.size() > 0) {
@@ -173,13 +132,11 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
             paddockResult = cr.list();
         } catch (HibernateException e) {
             e.printStackTrace();
-        } finally {
-            session.close();
         }
 
         if (paddockResult.size() > 0) {
             Paddock paddock = paddockResult.get(0);
-            return paddock.freeSpace();
+            return paddock.getCapacity() - paddock.getOccupants().size();
 
         }
 

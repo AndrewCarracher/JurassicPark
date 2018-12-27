@@ -32,13 +32,12 @@ public class Dinosaur {
     @JoinColumn(name = "paddock_id", nullable = false)
     private Paddock paddock;
 
-    public Dinosaur(String name, String type, int age, boolean fed, boolean eatsMeat, Paddock paddock){
+    public Dinosaur(String name, String type, int age, boolean fed, boolean eatsMeat){
         this.name = name;
         this.type = type;
         this.age = age;
         this.fed = fed;
         this.eatsMeat = eatsMeat;
-        this.paddock = paddock;
     }
 
     public Dinosaur() {
