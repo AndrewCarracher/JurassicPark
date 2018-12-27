@@ -13,7 +13,6 @@ class DinosaurView extends Component {
 
   handleDinosaurSubmit(newDino){
     if(newDino){
-      console.log(newDino);
       const request = new Request();
       request.post("/paddocks/add_dino", newDino).then(() => {
           window.location = "/paddocks"
@@ -24,7 +23,6 @@ class DinosaurView extends Component {
   handleDinosaurRemove(deadDino){
     console.log("yo");
     if(deadDino){
-      console.log(deadDino);
       const request = new Request();
       request.delete("/paddocks/kill_dino/" + deadDino).then(() => {
           // window.location = "/paddocks"

@@ -6,10 +6,13 @@ class RemoveDino extends Component {
     super(props)
     this.state = {
       dinosaurs: [],
+      paddocks: [],
+      paddockSelected: [],
       dinoSelected: [],
       id: []
     }
     this.handleDinoSelected = this.handleDinoSelected.bind(this);
+    this.handlePaddockSelected = this.handlePaddockSelected.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -18,6 +21,20 @@ componentDidMount(){
   request.get("/dinosaurs/").then((data) => {
     this.setState({dinosaurs: data});
     })
+  request.get("/paddocks/all").then((data) => {
+    this.setState({paddocks: data});
+    })
+}
+
+handlePaddockSelected(e){
+  if(e){
+    for(let i = 0; i< this.state.paddocks.length;  i++){
+      if (this.state.paddocks[i].name === e.target.value){
+        this.setState({paddockSelected: this.state.paddocks[i]});
+        this.setState({dinosaurs: this.state.paddocks[i].occupants})
+      }
+    }
+  }
 }
 
 handleDinoSelected(e){
@@ -30,23 +47,33 @@ handleSubmit(event) {
   event.preventDefault();
 
   this.props.handleDinosaurRemove(this.state.dinoSelected);
-  // this.setState({dinoSelected: []});
+  this.setState({dinoSelected: []});
 }
 
 render(){
 
+  console.log(this.state.paddockSelected);
+
   let dinos = this.state.dinosaurs;
-  let optionItems = dinos.map((dinosaur) =>
+  let paddocks = this.state.paddocks;
+  let individualDinos = dinos.map((dinosaur) =>
                <option key={dinosaur.id} value={dinosaur.id}>{dinosaur.name}</option>
            );
+  let individualPaddocks = paddocks.map((paddock) =>
+                <option key={paddock.name} value={paddock.name}>{paddock.name}</option>
+            );
 
-console.log(this.state.dinoSelected);
        return (
         <div>
             <>
+            <h4>Kill Dino</h4>
+            <p>Select Paddock</p>
+            <select value={this.state.paddockSelected} onChange={this.handlePaddockSelected}>
+              {individualPaddocks}
+            </select>
             <p>Select Dinosaur By Name</p>
             <select value={this.state.dinoSelected} onChange={this.handleDinoSelected}>
-               {optionItems}
+               {individualDinos}
             </select>
             <form onSubmit={this.handleSubmit}>
               <input type="submit" value="Kill Dinosaur" />
