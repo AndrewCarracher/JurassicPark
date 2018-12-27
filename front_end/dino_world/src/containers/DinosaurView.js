@@ -14,11 +14,8 @@ class DinosaurView extends Component {
     if(newDino){
       console.log(newDino);
       const request = new Request();
-      let requestString = newDino.name + "/" + newDino.age + "/" +        newDino.species + "/" + newDino.fed + "/" + newDino.eatsMeat;
-
-      request.post("/paddocks/add_new_dinosaur/" + requestString, newDino).then(() => {
-        console.log(requestString);
-        // window.location = "/paddocks"
+      request.post("/paddocks/add_dino", newDino).then(() => {
+          // window.location = "/paddocks"
       })
     }
   }

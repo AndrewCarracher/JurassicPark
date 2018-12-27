@@ -2,8 +2,6 @@ import React from 'react';
 
 const PetList = (props) => {
 
-console.log(props);
-
   return (
     <>
     {props.list.occupants.map(occupant => (

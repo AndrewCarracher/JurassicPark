@@ -24,15 +24,14 @@ public class PaddockController {
         return paddockRepository.allPaddocks();
     }
 
-    @PostMapping(path = "/add_dino/{id}", produces = "application/json")
-    public void addDinosaurToPaddock(@RequestBody Dinosaur dino, @PathVariable Long id){
-        Paddock paddock = paddockRepository.getOne(id);
-        if(paddock.isContainsCarnivores() == dino.isEatsMeat()) {
+    @PostMapping(path = "/add_dino", produces = "application/json")
+    public void addDinosaurToPaddock(@RequestBody Dinosaur dino){
+
+        Paddock paddock = paddockRepository.getFreePaddock(dino.isEatsMeat());
             paddock.addDinosaur(dino);
             dino.setPaddock(paddock);
             paddockRepository.save(paddock);
             dinosaurRepository.save(dino);
-        }
     }
 
     @DeleteMapping(path = "/kill_dino/{id}", produces = "application/json")

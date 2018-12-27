@@ -94,6 +94,22 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
     }
 
     @Transactional
+    public Paddock getFreePaddock(boolean containsCarnivores){
+        List<Paddock> paddockResult = null;
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Paddock.class);
+            cr.add(Restrictions.gt("containsCarnivores", containsCarnivores));
+            paddockResult = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+
+        return paddockResult.get(0);
+    }
+
+    @Transactional
     public Dinosaur removeDinosaur(String name, String type, String paddockName){
 
         List<Paddock> paddockResult = null;

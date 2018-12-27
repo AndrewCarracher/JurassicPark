@@ -15,8 +15,8 @@ public class Dinosaur {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "species")
+    private String species;
 
     @Column(name = "age")
     private int age;
@@ -32,9 +32,9 @@ public class Dinosaur {
     @JoinColumn(name = "paddock_id", nullable = false)
     private Paddock paddock;
 
-    public Dinosaur(String name, String type, int age, boolean fed, boolean eatsMeat){
+    public Dinosaur(String name, String species, int age, boolean fed, boolean eatsMeat){
         this.name = name;
-        this.type = type;
+        this.species = species;
         this.age = age;
         this.fed = fed;
         this.eatsMeat = eatsMeat;
@@ -84,11 +84,11 @@ public class Dinosaur {
     }
 
     public String getType() {
-        return type;
+        return species;
     }
 
     public void setType(String type) {
-        this.type = type;
+        this.species = species;
     }
 
     public int getAge() {

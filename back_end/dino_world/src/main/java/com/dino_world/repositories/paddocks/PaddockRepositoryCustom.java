@@ -11,4 +11,5 @@ public interface PaddockRepositoryCustom {
     public Long checkNewDinosaur(Dinosaur dinosaur);
     void addNewDinosaur(String dinosaurName, int dinosaurAge, String dinosaurSpecies, boolean fed, boolean eatsMeat);
     Dinosaur removeDinosaur(String name, String type, String paddockName);
+    Paddock getFreePaddock(boolean containsCarnivores);
 }

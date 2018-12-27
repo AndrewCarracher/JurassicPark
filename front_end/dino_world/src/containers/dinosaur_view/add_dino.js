@@ -31,12 +31,10 @@ class AddDino extends Component {
   }
   handleFedChange(event) {
     const fed = event.target.value;
-    console.log(event.target.value);
     this.setState({fed: fed});
   }
   handleEatsMeatChange(event) {
     const eatsMeat = event.target.value;
-    console.log(event.target.value);
     this.setState({eatsMeat: eatsMeat});
   }
 
