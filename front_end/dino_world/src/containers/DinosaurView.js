@@ -8,6 +8,7 @@ class DinosaurView extends Component {
   constructor(props){
     super(props)
     this.handleDinosaurSubmit = this.handleDinosaurSubmit.bind(this);
+    this.handleDinosaurRemove = this.handleDinosaurRemove.bind(this);
   }
 
   handleDinosaurSubmit(newDino){
@@ -20,12 +21,23 @@ class DinosaurView extends Component {
     }
   }
 
+  handleDinosaurRemove(deadDino){
+    console.log("yo");
+    if(deadDino){
+      console.log(deadDino);
+      const request = new Request();
+      request.delete("/paddocks/kill_dino/" + deadDino).then(() => {
+          // window.location = "/paddocks"
+      })
+    }
+  }
+
 render(){
   return(
     <>
       <h2>Dinosaur View</h2>
       <AddDino handleDinosaurSubmit = {this.handleDinosaurSubmit}/>
-      <RemoveDino />
+      <RemoveDino handleDinosaurRemove = {this.handleDinosaurRemove}/>
       <TransferDino />
     </>
   );
