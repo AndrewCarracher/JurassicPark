@@ -10,6 +10,6 @@ public interface PaddockRepositoryCustom {
     int freeSpace(String paddockName);
     public Long checkNewDinosaur(Dinosaur dinosaur);
     void addNewDinosaur(String dinosaurName, int dinosaurAge, String dinosaurSpecies, boolean fed, boolean eatsMeat);
-    Dinosaur removeDinosaur(String name, String type, String paddockName);
+    Dinosaur removeDinosaur(String name, String species, String paddockName);
     Paddock getFreePaddock(boolean containsCarnivores);
 }

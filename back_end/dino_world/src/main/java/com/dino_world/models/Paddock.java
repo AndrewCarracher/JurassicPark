@@ -109,7 +109,7 @@ public class Paddock {
         else if(!dinosaur.isEatsMeat() && !isContainsCarnivores()){
             return true;
         }
-        else if (occupants.get(0).getType().equals(dinosaur.getType())){
+        else if (occupants.get(0).getSpecies().equals(dinosaur.getSpecies())){
             return true;
         }
         else{
@@ -117,9 +117,9 @@ public class Paddock {
         }
     }
 
-    public Dinosaur removeDinosaur(String name, String type){
+    public Dinosaur removeDinosaur(String name, String species){
         for(int i = 0; i < numberOfDinosaurs(); i++){
-            if (occupants.get(i).getName().equals(name) && occupants.get(i).getType().equals(type)){
+            if (occupants.get(i).getName().equals(name) && occupants.get(i).getSpecies().equals(species)){
                 return occupants.get(i);
             }
         }

@@ -83,11 +83,11 @@ public class Dinosaur {
         this.name = name;
     }
 
-    public String getType() {
+    public String getSpecies() {
         return species;
     }
 
-    public void setType(String type) {
+    public void setSpecies(String species) {
         this.species = species;
     }
 

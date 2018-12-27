@@ -15,7 +15,7 @@ class DinosaurView extends Component {
       console.log(newDino);
       const request = new Request();
       request.post("/paddocks/add_dino", newDino).then(() => {
-          // window.location = "/paddocks"
+          window.location = "/paddocks"
       })
     }
   }

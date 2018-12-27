@@ -110,7 +110,7 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
     }
 
     @Transactional
-    public Dinosaur removeDinosaur(String name, String type, String paddockName){
+    public Dinosaur removeDinosaur(String name, String species, String paddockName){
 
         List<Paddock> paddockResult = null;
         Session session = entityManager.unwrap(Session.class);
@@ -127,7 +127,7 @@ public class PaddockRepositoryImpl implements  PaddockRepositoryCustom{
             Paddock paddock = paddockResult.get(0);
 
             for(int i = 0; i < paddock.numberOfDinosaurs(); i++){
-                if (paddock.getOccupants().get(i).getName().equals(name) && paddock.getOccupants().get(i).getType().equals(type)){
+                if (paddock.getOccupants().get(i).getName().equals(name) && paddock.getOccupants().get(i).getSpecies().equals(species)){
                     return paddock.getOccupants().get(i);
                 }
             }

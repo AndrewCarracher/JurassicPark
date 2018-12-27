@@ -126,12 +126,12 @@ public class Park {
         return "Outside parks opening hours";
     }
 
-    public Dinosaur findDino(String name, String type, boolean eatsMeat){
+    public Dinosaur findDino(String name, String species, boolean eatsMeat){
             for(int i = 0; i < this.pens.size(); i++){
                 if(pens.get(i).isContainsCarnivores() == eatsMeat){
 
                     for(int n = 0; n < pens.get(i).numberOfDinosaurs(); n++){
-                        return pens.get(i).removeDinosaur(name, type);
+                        return pens.get(i).removeDinosaur(name, species);
                     }
 
                 }
@@ -143,7 +143,7 @@ public class Park {
             return(paddock.checkCompatibility(dino));
     }
 
-    public void transferDino(String name, String type, boolean eatsMeat, Paddock paddockFrom, Paddock paddockTo){
+    public void transferDino(String name, String species, boolean eatsMeat, Paddock paddockFrom, Paddock paddockTo){
 
         if(isRampage()){
             return;
@@ -154,12 +154,12 @@ public class Park {
         }
 
 
-        Dinosaur dino = findDino(name, type, eatsMeat);
+        Dinosaur dino = findDino(name, species, eatsMeat);
         if(dino != null){
             for (int i = 0; i < pens.size(); i++){
                 if(pens.get(i).getName().equals(paddockFrom.getName())){
                     if(checkTransferPen(dino, paddockTo)){
-                        paddockFrom.removeDinosaur(dino.getName(), dino.getType());
+                        paddockFrom.removeDinosaur(dino.getName(), dino.getSpecies());
                         paddockTo.addDinosaur(dino);
                     }
                 }

@@ -29,6 +29,7 @@ public class PaddockController {
 
         Paddock paddock = paddockRepository.getFreePaddock(dino.isEatsMeat());
             paddock.addDinosaur(dino);
+            System.out.println(dino.getSpecies());
             dino.setPaddock(paddock);
             paddockRepository.save(paddock);
             dinosaurRepository.save(dino);
