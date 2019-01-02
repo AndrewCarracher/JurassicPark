@@ -8,6 +8,7 @@ class RemoveDino extends Component {
       dinosaurs: [],
       paddocks: [],
       paddockSelected: [],
+      paddockSelectedName:[],
       dinoSelected: [],
       id: []
     }
@@ -31,6 +32,7 @@ handlePaddockSelected(e){
     for(let i = 0; i< this.state.paddocks.length;  i++){
       if (this.state.paddocks[i].name === e.target.value){
         this.setState({paddockSelected: this.state.paddocks[i]});
+        this.setState({paddockSelectedName: this.state.paddocks[i].name});
         this.setState({dinosaurs: this.state.paddocks[i].occupants})
       }
     }
@@ -68,7 +70,7 @@ render(){
             <>
             <h4>Kill Dino</h4>
             <p>Select Paddock</p>
-            <select value={this.state.paddockSelected} onChange={this.handlePaddockSelected}>
+            <select value={this.state.paddockSelectedName} onChange={this.handlePaddockSelected}>
               {individualPaddocks}
             </select>
             <p>Select Dinosaur By Name</p>

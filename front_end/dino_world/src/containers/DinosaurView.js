@@ -21,12 +21,22 @@ class DinosaurView extends Component {
   }
 
   handleDinosaurRemove(deadDino){
-    console.log("yo");
     if(deadDino){
       const request = new Request();
       request.delete("/paddocks/kill_dino/" + deadDino).then(() => {
-          // window.location = "/paddocks"
+          window.location = "/paddocks"
       })
+    }
+  }
+
+  handleDinosaurTransfer(dino, newPaddock){
+    if(dino){
+      const request = new Request();
+      console.log(dino);
+      console.log(newPaddock);
+      // request.delete("/paddocks/kill_dino/" + deadDino).then(() => {
+      //     window.location = "/paddocks"
+      // })
     }
   }
 
@@ -36,7 +46,7 @@ render(){
       <h2>Dinosaur View</h2>
       <AddDino handleDinosaurSubmit = {this.handleDinosaurSubmit}/>
       <RemoveDino handleDinosaurRemove = {this.handleDinosaurRemove}/>
-      <TransferDino />
+      <TransferDino handleDinosaurTransfer = {this.handleDinosaurTransfer} />
     </>
   );
 }
